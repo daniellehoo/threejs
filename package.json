@@ -4,10 +4,12 @@
   "private": true,
   "dependencies": {
     "orbit-controls-es6": "^2.0.0",
+    "postprocessing": "^6.3.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
-    "three": "^0.104.0"
+    "three": "^0.104.0",
+    "three-orbitcontrols": "^2.102.1"
   },
   "scripts": {
     "start": "react-scripts start",
