@@ -6,21 +6,21 @@ import * as THREE from 'three';
 
 function EffectComposer(){
 
-	THREE.EffectComposer = function ( renderer, renderTarget ) {
+	EffectComposer = function ( renderer, renderTarget ) {
 
 		this.renderer = renderer;
 
 		if ( renderTarget === undefined ) {
 
 			var parameters = {
-				minFilter: THREE.LinearFilter,
-				magFilter: THREE.LinearFilter,
-				format: THREE.RGBAFormat,
+				minFilter: LinearFilter,
+				magFilter: LinearFilter,
+				format: RGBAFormat,
 				stencilBuffer: false
 			};
 
-			var size = renderer.getDrawingBufferSize( new THREE.Vector2() );
-			renderTarget = new THREE.WebGLRenderTarget( size.width, size.height, parameters );
+			var size = renderer.getDrawingBufferSize( new Vector2() );
+			renderTarget = new WebGLRenderTarget( size.width, size.height, parameters );
 			renderTarget.texture.name = 'EffectComposer.rt1';
 
 		}
