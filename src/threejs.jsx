@@ -6,13 +6,13 @@ import * as THREE from 'three';
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
 import {OBJLoader} from 'three/examples/jsm/loaders/OBJLoader';
 
-import { SSAOShader, SSAODepthShader, SSAOBlurShader } from './lib/shaders/SSAOShader';
+import { SSAOShader, SSAODepthShader, SSAOBlurShader } from '../lib/shaders/SSAOShader';
 
 import {HorizontalTiltShiftShader} from '../lib/shaders/HorizontalTiltShiftShader';
 import {VerticalTiltShiftShader} from '../lib/shaders/VerticalTiltShiftShader';
 import {SSAOPass} from '../lib/postprocessing/SSAOPass';
 
-import model from '../model/maneki-neko/luckycat.glb';
+import model from './model/maneki-neko/luckycat.glb';
 
 class Model extends Component {
   constructor(props) {
@@ -134,10 +134,10 @@ class Model extends Component {
 
   /////////////////////// AMBIENT OCCLUSION  /////////////////////////
 // addAmbientOcclusion(){
-  this.ssaoPass = new THREE.SSAOPass( scene, camera, width, height );
-  this.ssaoPass.kernelRadius = 16;
-  let effect = new THREE.EffectComposer( renderer );
-  effect.addPass( ssaoPass );
+  ssaoPass = new THREE.SSAOPass( scene, camera, width, height );
+  ssaoPass.kernelRadius = 16;
+  effectComposer = new THREE.EffectComposer( renderer );
+  effectComposer.addPass( ssaoPass );
   // Init gui
   let gui = new dat.GUI();
   gui.add( ssaoPass, 'output', {
