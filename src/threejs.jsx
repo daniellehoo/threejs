@@ -14,7 +14,7 @@ import {SSAOPass} from '../lib/postprocessing/SSAOPass';
 
 import model from './model/maneki-neko/luckycat.glb';
 
-class Model extends Component {
+class Threejs extends Component {
   constructor(props) {
     super(props)
 
@@ -131,12 +131,15 @@ class Model extends Component {
       console.log( 'An error happened' );
     }
   );
-
   /////////////////////// AMBIENT OCCLUSION  /////////////////////////
-// addAmbientOcclusion(){
-  ssaoPass = new THREE.SSAOPass( scene, camera, width, height );
+  // addAmbientOcclusion(){
+  // Setup render pass
+  let renderPass = new THREE.RenderPass(scene, camera);
+  // let ssaoPass = new THREE.SSAOPass( scene, camera, width, height );
+  let ssaoPass = new THREE.SSAOPass( THREE.SSAOShader );
+  ssaoPass.renderToScreen = true;
   ssaoPass.kernelRadius = 16;
-  effectComposer = new THREE.EffectComposer( renderer );
+  let effectComposer = new THREE.EffectComposer( renderer );
   effectComposer.addPass( ssaoPass );
   // Init gui
   let gui = new dat.GUI();
@@ -206,4 +209,4 @@ this.start()
   }
 }
 
-export default Model
+export default Threejs
