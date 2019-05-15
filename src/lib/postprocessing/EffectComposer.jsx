@@ -148,7 +148,7 @@ function EffectComposer(){
 
 						maskActive = true;
 
-					} else if ( pass instanceof THREE.ClearMaskPass ) {
+					} else if ( pass instanceof THREE.ClearMarkPass ) {
 
 						maskActive = false;
 

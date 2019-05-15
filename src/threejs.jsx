@@ -3,16 +3,23 @@ import {withGlobalState} from 'react-globally';
 
 import * as THREE from 'three';
 
+import model from './model/maneki-neko/luckycat.glb';
+
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
 import {OBJLoader} from 'three/examples/jsm/loaders/OBJLoader';
 
 import { SSAOShader, SSAODepthShader, SSAOBlurShader } from '../lib/shaders/SSAOShader';
 
-import {HorizontalTiltShiftShader} from '../lib/shaders/HorizontalTiltShiftShader';
-import {VerticalTiltShiftShader} from '../lib/shaders/VerticalTiltShiftShader';
-import {SSAOPass} from '../lib/postprocessing/SSAOPass';
+import {HorizontalTiltShiftShader} from './lib/shaders/HorizontalTiltShiftShader';
+import {VerticalTiltShiftShader} from './lib/shaders/VerticalTiltShiftShader';
+// import * as EffectComposer from '../lib/postprocessing/EffectComposer';
+// import * as SSAOPass from './lib/postprocessing/SSAOPass';
 
-import model from './model/maneki-neko/luckycat.glb';
+
+let EffectComposer = require('./lib/postprocessing/EffectComposer').EffectComposer;
+let RenderPass = require('./lib/postprocessing/RenderPass').RenderPass;
+let SSAOPass = require('./lib/posprocessing/SSAOPass'.SSAOPass)
+
 
 class Threejs extends Component {
   constructor(props) {
@@ -134,13 +141,13 @@ class Threejs extends Component {
   /////////////////////// AMBIENT OCCLUSION  /////////////////////////
   // addAmbientOcclusion(){
   // Setup render pass
-  let renderPass = new THREE.RenderPass(scene, camera);
+  RenderPass = new THREE.RenderPass(scene, camera);
   // let ssaoPass = new THREE.SSAOPass( scene, camera, width, height );
   let ssaoPass = new THREE.SSAOPass( THREE.SSAOShader );
   ssaoPass.renderToScreen = true;
   ssaoPass.kernelRadius = 16;
-  let effectComposer = new THREE.EffectComposer( renderer );
-  effectComposer.addPass( ssaoPass );
+  this.EffectComposer = new THREE.EffectComposer( renderer );
+  // effectComposer.addPass( ssaoPass );
   // Init gui
   let gui = new dat.GUI();
   gui.add( ssaoPass, 'output', {
